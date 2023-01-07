@@ -1,0 +1,56 @@
+{% liquid
+  assign collection_carousel_linklist = collection.metafields.wlcr.collection_slider_linklist
+  if collection.metafields.wlcr.banner_background_image != blank
+    assign banner_background_image = collection.metafields.wlcr.banner_background_image
+  endif
+  assign banner_foreground_image = collection.metafields.wlcr.banner_foreground_image
+
+  assign class = ''
+  assign no_margin_bottom = false
+
+  if collection_carousel_linklist != blank
+    assign no_margin_bottom = true
+  endif
+  unless no_margin_bottom == true
+    assign class = 'u-containerBottomMargin'
+  endunless
+%}
+
+<section
+  class='collection-banner shopify-section u-container u-contentWrapper {{ class }}'
+  {%- if banner_background_image -%}
+    style="--banner-background-image: url('{{ banner_background_image | image_url }}');"
+  {% else %}
+    style="--banner-background-image: url('{{ 'wlcr-collection-background-default.jpg' | asset_url }}');"
+  {%- endif -%}
+>
+  <div class='collection-content'>
+    {%- if banner_foreground_image -%}
+      <div
+        class='collection-banner-foregroundImage'
+        style="--banner-foreground-image: url('{{ banner_foreground_image | image_url }}');"
+      ></div>
+    {%- endif -%}
+    <div class='collection-bannerContent'>
+      <h1 class='collection-contentTitle'>{{ collection.title }}</h1>
+
+      {% if collection.description != blank %}
+        {{ collection.description }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% if collection_carousel_linklist != blank %}
+  {% render 'collection-carousel',
+    title: collection.title,
+    linklist_handle: collection_carousel_linklist
+  %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "limit": 1,
+  "templates": ["collection"]
+}
+{% endschema %}

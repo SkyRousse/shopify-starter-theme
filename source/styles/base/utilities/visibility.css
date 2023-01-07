@@ -1,0 +1,79 @@
+/* Visibility
+==================================================================== */
+
+.u-hidden {
+  display: none !important;
+}
+
+.u-visuallyHidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  word-wrap: normal !important;
+}
+
+.u-opacityHidden {
+  opacity: 0;
+}
+
+.u-opacityShown {
+  opacity: 1;
+}
+
+.u-hiddenScroll {
+  overflow-y: scroll;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Screen size based Visibility
+==================================================================== */
+
+@media (--mobile-only) {
+  .u-hiddenMobile {
+    display: none !important;
+  }
+}
+
+@media (--tablet-down) {
+  .u-hiddenTabletDown {
+    display: none !important;
+  }
+}
+
+@media (--tablet-only) {
+  .u-hiddenTablet {
+    display: none !important;
+  }
+}
+
+@media (--tablet) {
+  .u-hiddenTabletUp {
+    display: none !important;
+  }
+}
+
+@media (--laptop) {
+  .u-hiddenLaptopUp {
+    display: none !important;
+  }
+}
+
+/* JS based visibility
+==================================================================== */
+
+.no-js:not(html) {
+  display: none !important;
+}
+
+html.no-js .no-js-hidden {
+  display: none !important;
+}

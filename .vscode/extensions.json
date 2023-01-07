@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "shopify.theme-check-vscode",
+    "yzhang.markdown-all-in-one",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "eamodio.gitlens",
+    "killalau.vscode-liquid-snippets",
+    "mrmlnc.vscode-duplicate",
+    "csstools.postcss",
+    "formulahendry.auto-rename-tag",
+    "davidanson.vscode-markdownlint",
+    "rohit-gohri.format-code-action"
+  ]
+}

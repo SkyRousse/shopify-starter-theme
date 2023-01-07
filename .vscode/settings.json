@@ -1,0 +1,20 @@
+{
+  "editor.formatOnSave": true,
+  "shopifyLiquid.formatterDevPreview": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.colorDecorators": true,
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "emmet.includeLanguages": {
+    "postcss": "css",
+    "liquid": "html"
+  },
+  "typescript.validate.enable": false,
+  "[liquid]": {
+    "editor.defaultFormatter": "Shopify.theme-check-vscode"
+  }
+}

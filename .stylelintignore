@@ -1,0 +1,9 @@
+node_modules
+bin
+obj
+*.*
+!*.css
+!*.scss
+assets/*
+.github
+source/styles/legacy/**/*

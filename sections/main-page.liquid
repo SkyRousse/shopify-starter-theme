@@ -1,0 +1,109 @@
+{% liquid
+  assign banner_image = section.settings.banner_image
+  assign section_padding = section.settings.section_padding
+  assign section_width = section.settings.section_width
+
+  assign intro_text = null
+  if page.metafields.wlcr.intro_text != blank
+    assign intro_text = page.metafields.wlcr.intro_text
+  endif
+
+  case section_padding
+    when 'standard'
+      assign section_padding_class = 'u-containerYPadding'
+    when 'extra'
+      assign section_padding_class = 'u-containerYPaddingXl'
+  endcase
+
+  if banner_image and section_padding == 'standard'
+    assign section_padding_class = 'u-containerBottomPadding'
+  elsif banner_image and section_padding == 'extra'
+    assign section_padding_class = 'u-containerBottomPaddingXl'
+  endif
+
+  case section_width
+    when 'standard'
+      assign container_width_class = 'u-container'
+    when 'narrow'
+      assign container_width_class = 'u-containerNarrow'
+    when 'xnarrow'
+      assign container_width_class = 'u-containerXNarrow'
+  endcase
+%}
+
+<div class='page-template {{ section_padding_class }}'>
+  {% if banner_image != blank %}
+    {% render 'page-banner' image: banner_image, headline: page.title, description: intro_text %}
+  {% endif %}
+  <div class='{{ container_width_class }} u-contentWrapper'>
+    {% unless banner_image != blank %}
+      <h1>{{ page.title }}</h1>
+    {% endunless %}
+    <div class='u-spacerBase'>
+      {{ page.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Main Page Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "select",
+      "id": "section_padding",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "extra",
+          "label": "Extra"
+        }
+      ],
+      "default": "standard",
+      "label": "Section Padding",
+      "info": "Sets top and bottom padding for the section"
+    },
+    {
+      "type": "header",
+      "content": "Section Max Width"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "xnarrow",
+          "label": "XNarrow"
+        }
+      ],
+      "default": "standard",
+      "label": "Section Width",
+      "info": "Sets max content widths on medium to large screens: 1600px, 1140px, 660px"
+    }
+  ]
+}
+{% endschema %}

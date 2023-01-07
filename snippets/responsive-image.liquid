@@ -1,0 +1,80 @@
+{%- comment -%}
+  TODO: this is new - probably needs to be refined -- defaults
+  IMPORTANT: all previous uses of this snippet need to be updated to match new variables
+
+  use_image_url: if not declared or declared as false, this will default to true. pass a
+  false value for this prop if your image is not hosted on a Shopify CDN.
+{%- endcomment -%}
+
+{%- liquid
+  unless preload == true
+    assign preload = false
+  endunless
+
+  unless width
+    assign width = image.width
+  endunless
+
+  unless height
+    assign image_height = image.width | divided_by: image.aspect_ratio
+  endunless
+
+  unless zoom
+    assign zoom = ''
+  endunless
+
+  unless widths
+    assign widths = '180, 270, 360, 450, 540, 630, 720, 810, 900, 990, 1080, 1170, 1296, 1409, 1512, 1625, 1728, 1841, 1954, 2048'
+  endunless
+
+  unless sizes
+    assign sizes = '(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc(50vw - 40px), calc(33.33vw - 30px)'
+  endunless
+
+  unless alt
+    assign alt = image.alt | escape
+  endunless
+
+  unless data
+    assign data = ''
+  endunless
+
+  unless preload == true
+    assign loading = 'lazy'
+  endunless
+
+  assign image_class = 'u-responsiveImage ' | append: image_class
+-%}
+
+<div class="responsive-image-wrapper {{ wrapper_class }}" data-{{ data }}>
+  {% if widths %}
+    {{
+      image
+      | image_url: width: width
+      | image_tag:
+        loading: loading,
+        width: width,
+        height: image_height,
+        class: image_class,
+        sizes: sizes,
+        widths: widths,
+        preload: preload,
+        alt: alt,
+        data-action: zoom
+    }}
+  {% else %}
+    {{
+      image
+      | image_url: width: width
+      | image_tag:
+        loading: loading,
+        width: width,
+        height: image_height,
+        class: image_class,
+        sizes: sizes,
+        preload: preload,
+        alt: alt,
+        data-action: zoom
+    }}
+  {% endif %}
+</div>

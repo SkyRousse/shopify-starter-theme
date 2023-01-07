@@ -1,0 +1,22 @@
+.container,
+ul.container,
+.container--narrow,
+.entry-content {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container,
+ul.container {
+  max-width: var(--container-width);
+}
+
+.container--narrow {
+  max-width: var(--container-width-narrow);
+}
+
+.content-wrapper {
+  padding-left: var(--edge-space);
+  padding-right: var(--edge-space);
+}
+

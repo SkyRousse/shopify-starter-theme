@@ -1,0 +1,30 @@
+MatchingTranslations:
+  enabled: false
+
+NestedSnippet:
+  max_nesting_level: 8
+
+ignore:
+  - admin/**
+  - node_modules/**
+
+# Disable a check
+UnusedSnippet:
+  enabled: true
+  severity: suggestion
+  ignore:
+    # - snippets/icon-*
+
+RemoteAsset:
+  enabled: true
+  severity: suggestion
+  ignore:
+    - layout/checkout.liquid
+
+MissingEnableComment:
+  enabled: true
+  severity: suggestion
+
+ImgWidthAndHeight:
+  enabled: true
+  severity: suggestion

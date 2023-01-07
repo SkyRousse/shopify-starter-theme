@@ -1,0 +1,26 @@
+/* Spacers
+==================================================================== */
+
+.u-spacerXsmall {
+  margin-top: var(--spacer-xsmall);
+}
+
+.u-spacerBase {
+  margin-top: var(--spacer-base);
+}
+
+.u-spacerSmall {
+  margin-top: var(--spacer-small);
+}
+
+.u-spacerMedium {
+  margin-top: var(--spacer-medium);
+}
+
+.u-spacerLarge {
+  margin-top: var(--spacer-large);
+}
+
+.u-spacerXlarge {
+  margin-top: var(--spacer-xxlarge);
+}

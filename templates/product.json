@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_share_buttons": false,
+        "product_bumper_easy_care": true,
+        "product_bumper_free_shipping": true,
+        "product_bumper_free_returns": true
+      }
+    }
+  },
+  "order": [
+    "main",
+  ]
+}

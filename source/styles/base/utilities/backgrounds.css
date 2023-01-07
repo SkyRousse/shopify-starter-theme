@@ -1,0 +1,6 @@
+/* Background Colors
+==================================================================== */
+
+.u-greenBackground {
+  background-color: var(--secondary);
+}

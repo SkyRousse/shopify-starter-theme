@@ -1,0 +1,13 @@
+.u-objectFitCover {
+  object-fit: cover;
+}
+
+/* stylelint-disable-next-line plugin/selector-bem-pattern */
+.responsive-image-wrapper {
+  width: 100%;
+}
+
+.u-responsiveImage {
+  width: 100%;
+  height: auto;
+}

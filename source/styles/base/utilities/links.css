@@ -1,0 +1,11 @@
+/* Links
+==================================================================== */
+.u-linkDisabled {
+  /* this is just appearance! the link will still work */
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.u-linkUnstyled {
+  text-decoration: none;
+}

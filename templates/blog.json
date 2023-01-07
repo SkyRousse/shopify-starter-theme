@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "1659396761dd39256c": {
+      "type": "page-banner"
+    },
+    "16594584823a6b902d": {
+      "type": "main-blog",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "1659396761dd39256c",
+    "16594584823a6b902d"
+  ]
+}

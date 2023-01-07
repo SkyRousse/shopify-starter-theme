@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../source/scripts/global.js"],
+  "sourcesContent": ["console.log('Hi from global.js!');\n"],
+  "mappings": ";;AAAA,UAAQ,IAAI,oBAAoB;",
+  "names": []
+}

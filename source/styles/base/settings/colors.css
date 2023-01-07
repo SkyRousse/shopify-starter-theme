@@ -1,0 +1,52 @@
+:root {
+  /* Neutral Colors */
+  --white: #fff;
+  --light-gray: #ddd;
+  --gray: #aaa;
+  --black: #111;
+
+  /* Baseline Colors (Remove if not needed) */
+  --navy: #001f3f;
+  --blue: #0074d9;
+  --aqua: #7fdbff;
+  --teal: #39cccc;
+  --olive: #3d9970;
+  --green: #2ecc40;
+  --lime: #01ff70;
+  --yellow: #ffdc00;
+  --orange: #ff851b;
+  --red: #ff4136;
+  --fuchsia: #f012be;
+  --purple: #b10dc9;
+  --maroon: #85144b;
+
+  /* Brand Colors */
+
+  /* NOTE: Add all brand colors here */
+
+  /* End Brand Colors */
+
+  /* Element Colors */
+  --headline-color: inherit;
+  --body-font-color: var(--black);
+  --body-background-color: var(--white);
+  --link-color: var(--teal);
+  --link-color-hover: var(--aqua);
+  --link-color-active: var(--olive);
+  --button-primary-color: var(--teal);
+  --button-color: var(--button-primary-color);
+  --button-background-color: transparent;
+  --button-border-color: var(--button-primary-color);
+  --button-hover-color: var(--white);
+  --button-hover-background-color: var(--button-primary-color);
+  --button-active-color: var(--white);
+  --button-active-background-color: var(--fuchsia);
+  --hero-font-color: var(--01FF70);
+  --hero-background: var(--black);
+  --primary-gradient: linear-gradient(to bottom, #66f, var(--red));
+  --input-background: var(--cream);
+  --input-color: var(--black);
+  --input-border-color: var(--black);
+  --input-placeholder-color: var(--dark-cream);
+  --subnav-background-color: var(--red);
+}

@@ -1,0 +1,69 @@
+{
+  "name": "shopify-starter-theme",
+  "version": "1.0.0",
+  "homepage": "http://knackshops.com/",
+  "description": "Shopify starter theme using esbuild, postcss, and online2.0 theme framework",
+  "keywords": [
+    "Shopify"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 16.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^16.0.1",
+    "esbuild": "^0.15.13",
+    "esbuild-sass-plugin": "^2.4.0",
+    "glob": "^8.0.3",
+    "modern-css-reset": "^1.4.0",
+    "path": "^0.12.7",
+    "postcss": "^8.4.13",
+    "postcss-custom-media": "^8.0.0",
+    "postcss-import": "^14.1.0",
+    "postcss-nested": "^5.0.6",
+    "postcss-preset-env": "^7.5.0",
+    "postcss-pxtorem": "^6.0.0",
+    "prompts": "^2.4.2",
+    "rimraf": "^3.0.2",
+    "svgo": "^2.8.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "2.6.2",
+    "sass": "^1.56.0",
+    "stylelint": "^14.8.2",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "stylelint-prettier": "^2.0.0"
+  },
+  "scripts": {
+    "start": "npm run login && npm run dev",
+    "logout": "node ./build/tools/logout.js",
+    "login": "node ./build/tools/login.js",
+    "set-store": "node ./build/tools/setStore.js",
+    "dev": "shopify theme dev & npm run watch",
+    "build": "USE_WATCH=false node build/build.js",
+    "transform-svgs": "node -e 'require(\"./build/tools/svgTransforms\").svgTransforms()'",
+    "watch": "USE_WATCH=true node build/build.js",
+    "lint": "npm run eslint && npm run stylelint && npm run theme-check",
+    "eslint": "eslint ./source",
+    "stylelint": "stylelint $PWD/'source/**/*.{css,scss}'",
+    "lint-fix": "npm run eslint-fix && npm run stylelint-fix && npm run theme-check-fix",
+    "eslint-fix": "eslint --fix ./source",
+    "stylelint-fix": "stylelint --fix $PWD/'source/**/*.{css,scss}'",
+    "theme-check": "shopify theme check",
+    "theme-pull": "shopify theme pull --development --nodelete --only",
+    "theme-push": "shopify theme push --unpublished --theme",
+    "theme-check-fix": "shopify theme check -a",
+    "postinstall": "node ./build/tools/postInstall.js"
+  }
+}

@@ -1,0 +1,37 @@
+.u-buttonReset {
+  all: unset;
+  cursor: pointer;
+
+  &:hover {
+    background-color: unset;
+    color: unset;
+  }
+}
+
+.u-buttonLink {
+  margin: 8px var(--button-padding-x) 0 0;
+  font-size: var(--font-size-large);
+  color: var(--primary);
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  border-radius: 0;
+  padding: 0;
+
+  &::before {
+    background-color: transparent;
+  }
+
+  &:hover {
+    border: none;
+  }
+
+  &:active {
+    color: var(--button-light-active-background);
+    background-color: transparent;
+  }
+
+  &:focus-visible {
+    border-radius: var(--border-radius-base);
+  }
+}

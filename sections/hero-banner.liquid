@@ -1,0 +1,175 @@
+{% liquid
+  assign desktop_background_image = section.settings.desktop_image
+  assign mobile_background_image = section.settings.mobile_image
+  assign headline = section.settings.headline
+  assign paragraph = section.settings.paragraph
+  assign button_1_url = section.settings.button_1_url
+  assign button_1_text = section.settings.button_1_text
+  assign button_2_url = section.settings.button_2_url
+  assign button_2_text = section.settings.button_2_text
+  assign text_color_desktop = section.settings.text_color_desktop
+  assign text_color_mobile = section.settings.text_color_mobile
+  assign opacity_layer = section.settings.opacity_layer
+%}
+
+<section class='hero-banner'>
+  <div class='hero-banner__image-container {{ opacity_layer }}'>
+    {% if mobile_background_image != blank %}
+      <div class='hero-image__mobile'>
+        {% render 'responsive-image',
+          image: mobile_background_image,
+          image_class: 'hero-banner__image',
+          preload: true,
+          sizes: '100vw'
+        %}
+      </div>
+    {% endif %}
+    {% if desktop_background_image != blank %}
+      <div class='hero-image__desktop'>
+        {% render 'responsive-image',
+          image: desktop_background_image,
+          image_class: 'hero-banner__image',
+          preload: true,
+          sizes: '100vw'
+        %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div
+    class='banner-layout-{{ section.settings.content_alignment }} hero-banner-content u-container u-contentWrapper'
+    style='--hero-banner-small-text-color: {{ text_color_mobile }}; --hero-banner-large-text-color: {{ text_color_desktop }};'
+  >
+    <div class='hero-banner-content-inner'>
+      {% if headline != blank %}
+        {% liquid
+          if template.name == 'index'
+            assign tag = 'h2'
+          else
+            assign tag = 'h1'
+          endif
+        %}
+        <{{ tag }} class='h1 hero-banner-headline display-heading'>
+          {{ headline }}
+        </{{ tag }}>
+      {% endif %}
+      {% if paragraph != blank %}
+        <div class='hero-banner-paragraph'>
+          {{ paragraph }}
+        </div>
+      {% endif %}
+      <div class='hero-banner-buttons'>
+        {% if button_1_url and button_1_text != blank %}
+          <a class='hero-banner-button button' href='{{ button_1_url }}'>{{ button_1_text }}</a>
+        {% endif %}
+        {% if button_2_url and button_2_text != blank %}
+          <a class='hero-banner-button button' href='{{ button_2_url }}'>{{ button_2_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "type": "richtext",
+      "id": "paragraph",
+      "label": "Paragraph"
+    },
+    {
+      "type": "url",
+      "id": "button_1_url",
+      "label": "Button 1 Url"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "Button 2 Url"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 Text"
+    },
+    {
+      "type": "color",
+      "id": "text_color_desktop",
+      "label": "Text Color Desktop",
+      "default": "#323E48"
+    },
+    {
+      "type": "color",
+      "id": "text_color_mobile",
+      "label": "Text Color Mobile",
+      "default": "#323E48"
+    },
+    {
+      "type": "select",
+      "id": "opacity_layer",
+      "label": "Opacity Layer",
+      "options": [
+        {
+          "label": "None",
+          "value": "opacity-layer-none"
+        },
+        {
+          "label": "50% Light",
+          "value": "opacity-layer-light"
+        },
+        {
+          "label": "50% Dark",
+          "value": "opacity-layer-dark"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

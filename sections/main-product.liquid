@@ -1,0 +1,352 @@
+{% liquid
+  assign MAX_QUANTITY = 10
+  assign current_variant = product.selected_or_first_available_variant
+  assign first_color = current_variant.option1
+  assign color_for_alt_tag = first_color | split: ' ' | join: ''
+  assign ymal = product.metafields.ymal.collection
+  assign pairs_with = product.metafields.pairs_with.collection
+%}
+
+<script>
+  window.FormProductVariantData = {{ product.variants | json }};
+  window.FormProductDataFirstVariant = {{ current_variant | json }};
+  window.FormProductMaxQuantity = {{ MAX_QUANTITY }};
+  window.ProductMedia = {{ product.media | json }};
+</script>
+
+<section data-section-id='{{ section.id }}' data-section-type='product'>
+  <div class='u-container u-contentWrapper product-top'>
+    <div class='product-section-left u-hiddenMobile'>
+      <div
+        class='ProductImages--large u-opacityHidden'
+        data-id='product-page-images'
+      >
+        {% if product.options contains 'Color' %}
+          {% render 'product-images-large',
+            color: color_for_alt_tag,
+            current_variant: current_variant
+          %}
+        {% else %}
+          {% render 'product-images-large', color: null, current_variant: current_variant %}
+        {% endif %}
+      </div>
+    </div>
+    <div class='product-section-right'>
+      <div>
+        {% render 'breadcrumbs' %}
+        <h1>{{ product.title }}</h1>
+        <div class='product-info'>
+          {% render 'product-price',
+            compare_at_price: current_variant.compare_at_price,
+            price: current_variant.price
+          %}
+          <div class='product-rating-wrapper'>
+            {% render 'product-rating-stars', product_id: product.id %}
+          </div>
+        </div>
+        {% if product.tags contains 'final sale' %}
+          <p class='product-final-sale'>
+            {{ 'products.product.final_sale' | t }}
+          </p>
+        {% endif %}
+      </div>
+      <div class='u-hiddenTabletUp'>
+        <div
+          class='ProductImages--small'
+          data-id='product-page-images-small'
+        >
+          <div class='ProductCarousel carousel'>
+            <div class='swiper-wrapper' data-id='product-carousel-wrapper'>
+              {% if product.options contains 'Color' %}
+                {% render 'product-images-small',
+                  color: color_for_alt_tag,
+                  current_variant: current_variant
+                %}
+              {% else %}
+                {% render 'product-images-small', color: null, current_variant: current_variant %}
+              {% endif %}
+            </div>
+            <div class='swiper-pagination'></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        {% form 'product',
+          product,
+          class: 'ProductForm',
+          data-selected-variant: current_variant.id,
+          data-product-handle: product.handle,
+          data-enable-history-state: 'true'
+        %}
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              {% assign option_index = forloop.index0 %}
+              <div class='js'>
+                {% if option.name == 'Color' %}
+                  <div class='ProductForm-section ProductFormColors'>
+                    <label class='u-fontWeightHeavy'>
+                      {{- option.name -}}
+                      <span
+                        class='ProductForm-selectedOptionDisplay'
+                        data-id='product-form-current-color'
+                      >
+                        {{- current_variant.options[0] -}}
+                      </span>
+                    </label>
+                    <div class='ProductFormColors-inputs'>
+                      {% render 'component-color-swatches',
+                        option: option,
+                        product: product,
+                        option_index: option_index,
+                        label_class: 'ProductFormColors-inputLabel'
+                      %}
+                    </div>
+                  </div>
+                {% elsif option.name == 'Size' %}
+                  <div class='ProductForm-section ProductFormSizes'>
+                    <label class='u-fontWeightHeavy'>
+                      {{- option.name }}
+                      <span class='ProductForm-selectedOptionDisplay'
+                        ><button
+                          aria-label='Size guide'
+                          class='button link ProductForm-focus'
+                          type='button'
+                          data-micromodal-trigger='product-size-guide-modal'
+                        >
+                          Size Guide
+                        </button></span
+                      ></label
+                    >
+                    <div class='ProductFormSizes-inputsContainer'>
+                      {% for value in option.values %}
+                        <input
+                          data-id='product-form-size-input'
+                          class='ProductFormSizes-input u-visuallyHidden'
+                          id='size-{{ forloop.index }}'
+                          type='radio'
+                          value='{{ value | escape }}'
+                          name='size'
+                          {% if option.selected_value == value %}
+                            checked
+                          {% endif %}
+                          data-optionindex='{{ option_index }}'
+                        >
+                        <label class='ProductFormSizes-inputLabel' for='size-{{ forloop.index }}'>
+                          <div class='size-box'>
+                            <span>{{ value }}</span>
+                          </div>
+                        </label>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% else %}
+                  {% comment %} eg gift card {% endcomment %}
+                  <div class='ProductForm-section ProductFormValueOptions'>
+                    <label for='Option{{ option.position }}' class='u-fontWeightHeavy'>
+                      {{ option.name }}
+                    </label>
+
+                    <select
+                      class='select'
+                      style='background-image: url({{ 'chevron-down.svg' | asset_url }});'
+                      id='Option{{ option.position }}'
+                      name='options[{{ option.name | escape }}]'
+                      data-optionindex='{{ option_index }}'
+                      data-id='option-value'
+                    >
+                      {% for value in option.values %}
+                        <option
+                          value='{{ value | escape }}'
+                          {% if option.selected_value == value %}
+                            selected='selected'
+                          {% endif %}
+                        >
+                          {{ value }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% endunless %}
+          {% comment %} Add this form easier ajax form submission. Update dynamically {% endcomment %}
+          <input
+            type='hidden'
+            id='current-variant-id'
+            name='id'
+            value='{{ current_variant.id }}'
+            data-id='product-form-variant-id'
+          >
+
+          <noscript>
+            <select name='id'>
+              {% for variant in product.variants %}
+                <option
+                  {% if variant == current_variant %}
+                    selected='selected'
+                  {% endif %}
+                  {% unless variant.available %}
+                    disabled='disabled'
+                  {% endunless %}
+                  value='{{ variant.id }}'
+                >
+                  {{ variant.title }}
+                </option>
+              {% endfor %}
+            </select>
+          </noscript>
+          <div class='ProductFormBottom'>
+            <label for='Quantity' class='u-fontWeightHeavy'>
+              {{- 'products.product.quantity.label' | t -}}
+            </label>
+            <div class='ProductFormBottom-submitContainer'>
+              <select
+                class='select'
+                id='Quantity'
+                name='quantity'
+                style='background-image: url({{ 'chevron-down.svg' | asset_url }});'
+                data-id='product-form-quantity-select'
+              >
+                {% if current_variant.inventory_management %}
+                  {% for i in (1..current_variant.inventory_quantity) %}
+                    {% if i <= MAX_QUANTITY %}
+                      <option value='{{ i }}'>{{ i }}</option>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  {% for i in (1..MAX_QUANTITY) %}
+                    <option value='{{ i }}'>{{ i }}</option>
+                  {% endfor %}
+                {% endif %}
+              </select>
+
+              <button
+                class='button ProductForm-submit'
+                aria-haspopup='dialog'
+                type='submit'
+                name='add'
+                {% unless current_variant.available %}
+                  disabled='disabled'
+                {% endunless %}
+              >
+                <span
+                  data-submit-button-text='{{ 'products.product.add_to_cart' | t }}'
+                  data-submit-button-text-soldout='{{ 'products.product.sold_out' | t }}'
+                >
+                  {% if current_variant.available %}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {% else %}
+                    {{ 'products.product.sold_out' | t }}
+                  {% endif %}
+                </span>
+              </button>
+            </div>
+          </div>
+        {% endform %}
+      </div>
+      <div>
+        {% render 'fabric-highlight' %}
+        {% render 'product-details-accordion', product: product %}
+        {% render 'product-bumper' %}
+
+        {% if section.settings.show_share_buttons %}
+          {% render 'social-sharing',
+            share_title: product.title,
+            share_permalink: product.url,
+            share_image: product
+          %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %} {% render 'component-tabs' %} {% endcomment %}
+
+{% comment %}
+  --- TEMPORARY CODE ---
+  We'll likely need some sort of extra section for all of the additional metafield
+  content on the PDP. This is just a place to demo the Accentuate metafield schema
+  in the admin and some ways to use it. The accentuate_data snippet has some code
+  samples, as well as the feature block code below. However, there's a chance this
+  will require some changes, such as:
+  - adding a Feature Block sort order to Accentuate to iterate over each block
+  - potentially rendering pre-made Fabric Features instead of relying on metadata
+    to create the parts; using fabric_type to render hard-coded sections.
+{% endcomment %}
+<section class='extra-pdp-stuff'>
+  {% comment %} {% render 'accentuate_data' product: product %} {% endcomment %}
+  {% liquid
+    assign meta = product.metafields.wlcr
+    assign image_right_heading = meta.image_right_heading
+    assign image_right_content = meta.image_right_content
+    assign image_right_image = meta.image_right_image[0]
+    assign image_left_heading = meta.image_left_heading
+    assign image_left_content = meta.image_left_content
+    assign image_left_image = meta.image_left_image[0]
+    assign image_only_desktop_image = meta.image_only_desktop_image[0]
+    assign image_only_mobile_image = meta.image_only_mobile_image[0]
+
+    if image_right_image and image_right_heading
+      render 'feature-block', feature_layout: 'image-right', desktop_image: image_right_image, mobile_image: image_right_image, feature_headline: image_right_heading, feature_copy: image_right_content
+    endif
+    if image_left_image and image_left_heading
+      render 'feature-block', feature_layout: 'image-left', desktop_image: image_left_image, mobile_image: image_left_image, feature_headline: image_left_heading, feature_copy: image_left_content
+    endif
+    if image_only_desktop_image and image_only_mobile_image
+      render 'feature-block', feature_layout: 'image-only', desktop_image: image_only_desktop_image, mobile_image: image_only_mobile_image
+    endif
+  %}
+
+  {% comment %} You Might Also Like {% endcomment %}
+  {% liquid
+    if ymal != blank
+      assign products = collections[ymal].products
+      assign title = 'You Might Also Like'
+      render 'collection-carousel', title: title, product_array: products, current_product: product
+    endif
+  %}
+
+  {% comment %} Pairs Well With {% endcomment %}
+  {% liquid
+    if pairs_with != blank
+      assign products = collections[pairs_with].products
+      assign title = 'Pairs Well With'
+      render 'collection-carousel', title: title, product_array: products, current_product: product
+    endif
+  %}
+</section>
+
+{% schema %}
+{
+  "name": "Product pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show social sharing buttons",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "product_bumper_easy_care",
+      "label": "Easy Care",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "product_bumper_fast_shipping",
+      "label": "Fast Shipping",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "product_bumper_free_returns",
+      "label": "Free Returns",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,62 @@
+:root {
+  /* TODO these need to be updated to match designs/site needs uncomment as updated */
+
+  --page-width: 100%;
+
+  /* --page-width-xnarrow: 420px; */
+
+  /* --page-width-medium: 1140px; */
+
+  /* --page-width-large: 1320px; */
+
+  /* --page-width-margin: 32px; */
+
+  /* --spacer-xsmall: 16px; */
+
+  /* --spacer-small: 25px; */
+
+  /* --spacer-medium: 40px; */
+
+  /* --spacer-large: 60px; */
+
+  /* --spacer-xlarge: 95px; */
+
+  --edge-padding-xsmall: var(--spacer-xsmall);
+  --edge-padding-small: var(--spacer-small);
+  --edge-padding-medium: var(--spacer-medium);
+
+  /* Custom focus */
+
+  /* --focus-indicator-width: 2px; */
+
+  /* --focus-indicator-offset: 9px; */
+
+  /* --focus-indicator-radius: 3px; */
+
+
+  /* --input-padding-y: 4px; */
+
+  /* --input-padding-x: 10px; */
+
+  /* --input-padding: var(--input-padding-y) var(--input-padding-x); */
+
+  /* --input-border-size: 1px; */
+
+  /* --input-border-radius: 0px; */
+
+  /* --form-spacer: 22px; */
+
+  /* --form-spacer-half: calc(var(--form-spacer) / 2); */
+
+  /* --button-border-radius: 0; */
+
+  /* --button-border-width: 2px; */
+
+  /* --transition-duration: 150ms; */
+
+  /* --transition-timing-function: linear; */
+
+  /* --global-transition: var(--transition-duration) var(--transition-timing-function); */
+
+  /* --media-image-aspect-ratio: calc(4 / 3); */
+}

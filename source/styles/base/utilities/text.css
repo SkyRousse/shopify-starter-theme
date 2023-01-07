@@ -1,0 +1,96 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+
+/* Text
+==================================================================== */
+
+.u-textCenter {
+  text-align: center;
+}
+
+.u-textRight {
+  text-align: right;
+}
+
+.u-uppercase {
+  text-transform: uppercase;
+}
+
+.u-fontWeightLight {
+  font-weight: var(--font-weight-light);
+}
+
+.u-fontWeightBook {
+  font-weight: var(--font-weight-book);
+}
+
+.u-fontWeightMedium {
+  font-weight: var(--font-weight-medium);
+}
+
+.u-fontWeightBold {
+  font-weight: var(--font-weight-bold);
+}
+
+.u-fontWeightHeavy {
+  font-weight: var(--font-weight-heavy);
+}
+
+.u-smallText {
+  font-size: var(--font-size-small) !important;
+}
+
+.u-mediumText {
+  font-size: var(--font-size-medium) !important;
+}
+
+.u-bookText {
+  font-weight: var(--font-weight-book);
+}
+
+.u-captionText {
+  font-size: var(--font-size-small);
+  color: var(--primary-blue-500);
+}
+
+.u-strikeThru {
+  text-decoration: line-through;
+}
+
+.u-error {
+  color: var(--error-500);
+
+  & * {
+    color: var(--error-500) !important;
+  }
+}
+
+.u-iconText {
+  opacity: 0; /* hide unless in focus or on hover */
+  @media (--motion) {
+    animation: fade-out var(--nav-transition);
+  }
+
+  background: var(--body-background-color);
+  font-size: var(--font-size-xsmall);
+  padding: 8px 10px;
+  position: absolute;
+  top: calc(100% + var(--spacer-base) + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+*:focus-visible > .u-iconText,
+*:hover > .u-iconText {
+  opacity: 1;
+  @media (--motion) {
+    animation: fade-in var(--nav-transition);
+  }
+}
+
+.u-textColorLight {
+  color: var(--white);
+}
+
+.u-textColorDark {
+  color: var(--primary-blue-700);
+}

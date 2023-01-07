@@ -1,0 +1,13 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "plugins": ["stylelint-selector-bem-pattern"],
+  "rules": {
+    "selector-class-pattern": null,
+    "selector-id-pattern": null,
+    "plugin/selector-bem-pattern": {
+      "preset": "suit",
+      "implicitUtilities": "source/styles/base/utilities/*.css",
+      "ignoreSelectors": [".icon-.+$", ".no-.+$"]
+    }
+  }
+}

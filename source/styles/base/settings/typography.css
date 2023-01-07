@@ -1,0 +1,42 @@
+:root {
+  /* Fonts */
+  --font-gotham: "Gotham", helvetica, arial, sans-serif;
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-book: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Font Sizes */
+  --font-size-xsmall: 12.8px;
+  --font-size-small: 14px;
+  --font-size-medium: 17.5px;
+  --font-size-large: 27.3px;
+
+  /* Line Heights */
+  --line-height-small: 1;
+  --line-height-med: 1.5;
+
+  /* Letter Spacing */
+  --letter-spacing-small: 0.5px;
+
+  /* Font Body */
+  --font-body-family: var(--font-gotham);
+  --font-body-style: normal;
+  --font-body-weight: var(--font-weight-medium);
+  --font-body-size: var(--font-size-medium);
+
+  /* Font Headings */
+  --font-heading-family: var(--font-gotham);
+  --font-heading-style: normal;
+  --font-size-h1: 48.8px;
+  --font-size-h2: 39.1px;
+  --font-size-h3: 31.2px;
+  --font-size-h4: 25px;
+  --font-size-h5: 20px;
+  --font-size-h6: 16px;
+
+  /* Buttons */
+  --button-font-size: 14px;
+}

@@ -1,0 +1,14 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+body {
+  &.u-drawerMenuOpen {
+    overflow: hidden !important;
+    padding-right: var(--scrollbar-width) !important;
+  }
+
+  &.u-drawerMenuOpenTablet {
+    @media (--tablet-down) {
+      overflow: hidden !important;
+      padding-right: var(--scrollbar-width) !important;
+    }
+  }
+}

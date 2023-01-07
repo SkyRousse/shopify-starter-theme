@@ -1,0 +1,112 @@
+.button,
+a.button {
+  --button-padding: var(--input-padding);
+
+  position: relative;
+  display: inline-block;
+  padding: var(--button-padding);
+  line-height: 1;
+  text-decoration: none;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-book);
+  font-size: var(--button-font-size);
+  letter-spacing: 0.5px;
+  color: var(--button-color);
+  background-color: transparent;
+  border-color: var(--button-border-color);
+  border-width: var(--button-border-width);
+  border-style: solid;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+
+  /* Hover & Active States */
+  &:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-hover-color);
+
+    &::after {
+      transform: scaleY(1);
+    }
+  }
+
+  &:active {
+    background-color: var(--button-active-background-color);
+    color: var(--button-active-color);
+    border-color: var(--button-active-background-color);
+
+    &::after {
+      background-color: var(--button-active-background-color);
+    }
+  }
+
+  /* Additional button styles */
+  &.alt {
+    --button-background-color: var(--blue);
+    --button-hover-background-color: var(--light-blue);
+    --button-active-background-color: var(--light-blue);
+  }
+
+  &.secondary {
+    --button-border-color: var(--white);
+    --button-color: var(--white);
+    --button-background-color: var(--green);
+    --button-hover-color: var(--gratis-black);
+    --button-hover-background-color: var(--light-green);
+    --button-active-background-color: var(--dark-green);
+  }
+
+  &.tertiary {
+    --button-border-color: var(--white);
+    --button-color: var(--black);
+    --button-background-color: var(--blue);
+    --button-hover-color: var(--black);
+    --button-hover-background-color: var(--light-blue);
+    --button-active-background-color: var(--light-blue);
+  }
+
+  &.hollow {
+    --button-color: var(--black);
+    --button-hover-color: var(--black);
+    --button-hover-background-color: var(--button-background-color);
+    --button-border-color: var(--button-background-color);
+
+    &::before {
+      background-color: transparent;
+    }
+  }
+
+  &[disabled] {
+    --button-color: var(--mid-gray);
+    --button-background-color: var(--light-gray);
+    --button-hover-background-color: var(--light-gray);
+    --button-hover-color: var(--mid-gray);
+  }
+
+  & > * {
+    pointer-events: none;
+  }
+}
+
+.text-button,
+button.text-button {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--link-color);
+
+  &:hover {
+    color: var(--link-color-hover);
+  }
+
+  &:active {
+    color: var(--link-color-active);
+  }
+}
+
+.button-reset {
+  all: unset;
+  cursor: pointer;
+}

@@ -1,0 +1,59 @@
+{% liquid
+  assign image = section.settings.image
+  assign headline = section.settings.headline
+  assign description = section.settings.description
+  assign button_1_text = section.settings.button_1_text
+  assign button_2_text = section.settings.button_2_text
+  assign button_1_url = section.settings.button_1_url
+  assign button_2_url = section.settings.button_2_url
+%}
+
+{% render 'page-banner' image: image, headline: headline, description: description, button_1_text: button_1_text, button_2_text: button_2_text, button_1_url: button_1_url, button_2_url: button_2_url %}
+
+{% schema %}
+{
+  "name": "Page Banner Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Button 1 Text"
+    },
+    {
+      "type": "url",
+      "id": "button_1_url",
+      "label": "Button 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button 2 Text"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "Button 2 URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Banner Section"
+    }
+  ]
+}
+{% endschema %}

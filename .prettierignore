@@ -1,0 +1,2 @@
+# For github actions: default GITHUB_TOKEN cannot be used to update workflow files due to the missing workflow permission
+.github/workflows/*.yml
